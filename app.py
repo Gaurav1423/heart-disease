@@ -1,11 +1,18 @@
 from flask import Flask, request, url_for, redirect, render_template
 import joblib
 import numpy as np
+import os
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = 'abd3e6fb8a9854dd92a30cfc6dab510d'
-clf = joblib.load(r'E:\uselessFiles\Heart-Disease-Prediction-using-ML-main\heart_log_regr.sav')
+current_dir = os.path.dirname(__file__)
+
+# Construct the relative path to the model file
+model_path = os.path.join(current_dir, 'heart_log_regr.sav')
+
+# Load the model
+clf = joblib.load(model_path)
 
 @app.route('/')
 def hello_world():
