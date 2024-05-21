@@ -35,6 +35,6 @@ def predict():
         return render_template('Project.html', pred='Your Heart is in Danger.\nProbability of heart disease is {}'.format(output), res="Do consult a doctor!!")
     else:
         return render_template('Project.html', pred='Your Heart is safe.\n Probability of heart disease is {}'.format(output), res="Eat safe and be healthy..")
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
