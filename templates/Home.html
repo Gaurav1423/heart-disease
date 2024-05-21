@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://storage.googleapis.com/kaggle-datasets-images/1582403/2603715/fc66626bcce9dec0f401f3f69c2ab2d1/dataset-cover.jpg?t=2021-09-10-18-13-42');
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* Full height of the viewport */
+            display: flex;
+            flex-direction: column; /* Arrange children in a column */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            color: white; /* Text color */
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            padding: 10px 20px;
+            box-sizing: border-box; /* Include padding in width calculation */
+            z-index: 1; /* Ensure navbar stays on top */
+        }
+        
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 18px;
+            transition: color 0.3s; /* Smooth color transition */
+        }
+        
+        .navbar a:hover {
+            color: #55ff55; /* Light green on hover */
+        }
+        
+        .content {
+            text-align: center; /* Center text */
+            margin-top: 50px; /* Add margin to push content below navbar */
+        }
+        
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            transition-duration: 0.4s; /* Animation speed */
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Add shadow */
+        }
+        
+        .button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        
+        .button:active {
+            background-color: #3e8e41; /* Darker green when clicked */
+            box-shadow: 0 5px #666; /* Add shadow when clicked */
+            transform: translateY(4px); /* Move down when clicked */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Welcome to the Heart Disease Prediction App</h1>
+        <a href="{{ url_for('project') }}" class="button">Check Heart Health</a>
+    </div>
+</body>
+</html>
