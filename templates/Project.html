@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 66vh; /* Set height to 70% of viewport height */
+        overflow-y: auto; /* Add scrollbar if content overflows */
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input[type="number"],
+      input[type="text"],
+      input[type="radio"] {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+      }
+
+      input[type="number"]:focus,
+      input[type="text"]:focus,
+      input[type="radio"]:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+
+      .form-field {
+        margin-bottom: 20px;
+      }
+
+      .form-field:not(:last-child) {
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 15px;
+      }
+
+      .form-buttons {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .clear-btn {
+        background-color: #f44336;
+      }
+
+      .clear-btn:hover {
+        background-color: #e41e1e;
+      }
+
+      .result {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .result h2 {
+        color: #333;
+      }
+
+      .result p {
+        color: #555;
+      }
+
+      a {
+        display: block;
+        margin-top: 20px;
+        color: #007bff;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      a:hover {
+        color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Check Your Heart Health</h1>
+      <a href="/">Home</a>
+    </div>
+    <form id="healthForm" action="{{ url_for('predict') }}" method="POST">
+      <div class="form-field">
+        <label for="age">Age:</label>
+        <input type="number" name="age" required />
+      </div>
+
+      <div class="form-field">
+        <label>Sex:</label>
+        <input type="radio" name="sex" value="1" required /> Male
+        <input type="radio" name="sex" value="0" required /> Female
+      </div>
+
+      <div class="form-field">
+        <label>Chest Pain Type:</label>
+        <input type="radio" name="cp" value="1" required /> Typical Angina
+        <input type="radio" name="cp" value="2" required /> Atypical Angina
+        <input type="radio" name="cp" value="3" required /> Non-Anginal Pain
+        <input type="radio" name="cp" value="4" required /> Asymptomatic
+      </div>
+
+      <div class="form-field">
+        <label>Resting Blood Pressure (mm Hg):</label>
+        <input type="number" name="trestbps" required />
+      </div>
+
+      <div class="form-field">
+        <label>Cholesterol (mg/dl):</label>
+        <input type="number" name="chol" required />
+      </div>
+
+      <div class="form-field">
+        <label>Fasting Blood Sugar (> 120 mg/dl):</label>
+        <input type="radio" name="fbs" value="1" required /> True
+        <input type="radio" name="fbs" value="0" required /> False
+      </div>
+
+      <div class="form-field">
+        <label>Resting ECG Results:</label>
+        <input type="radio" name="restecg" value="0" required /> Normal
+        <input type="radio" name="restecg" value="1" required /> Having ST-T
+        wave abnormality
+        <input type="radio" name="restecg" value="2" required /> Showing
+        probable or definite left ventricular hypertrophy
+      </div>
+
+      <div class="form-field">
+        <label>Maximum Heart Rate Achieved:</label>
+        <input type="number" name="thalach" required />
+      </div>
+
+      <div class="form-field">
+        <label>Exercise Induced Angina:</label>
+        <input type="radio" name="exang" value="1" required /> Yes
+        <input type="radio" name="exang" value="0" required /> No
+      </div>
+
+      <div class="form-field">
+        <label>ST Depression Induced by Exercise Relative to Rest:</label>
+        <input type="number" step="0.1" name="oldpeak" required />
+      </div>
+
+      <div class="form-field">
+        <label>Slope of the Peak Exercise ST Segment:</label>
+        <input type="radio" name="slope" value="1" required /> Upsloping
+        <input type="radio" name="slope" value="2" required /> Flat
+        <input type="radio" name="slope" value="3" required /> Downsloping
+      </div>
+
+      <div class="form-field">
+        <label>Number of Major Vessels (0-3):</label>
+        <input type="number" name="ca" required />
+      </div>
+
+      <div class="form-field">
+        <label>Thalassemia:</label>
+        <input type="radio" name="thal" value="3" required /> Normal
+        <input type="radio" name="thal" value="6" required /> Fixed Defect
+        <input type="radio" name="thal" value="7" required /> Reversible Defect
+      </div>
+    </form>
+
+    <div class="form-buttons">
+      <button id="predictButton" class="predict-btn">Predict</button>
+      <button
+        class="clear-btn"
+        type="button"
+        onclick="document.getElementById('healthForm').reset()"
+      >
+        Clear Form
+      </button>
+    </div>
+
+    <div class="result">
+      {% if pred %}
+      <h2>{{ pred }}</h2>
+      <p>{{ res }}</p>
+      {% endif %}
+    </div>
+
+    <script>
+      // Function to enable/disable predict button based on form validity
+      function checkFormValidity() {
+        var form = document.getElementById("healthForm");
+        var predictButton = document.getElementById("predictButton");
+        // Enable the predict button if all form fields are valid
+        //predictButton.disabled = !form.checkValidity();
+      }
+
+      // Add event listener to the form for input change
+      var form = document.getElementById("healthForm");
+      form.addEventListener("input", checkFormValidity);
+
+      // Function to handle predict button click
+      function predictButtonClick() {
+        var form = document.getElementById("healthForm");
+        // Check if all form fields are filled
+        if (!form.checkValidity()) {
+          alert("Please fill in all form fields.");
+        } else {
+          // Submit the form if all fields are filled
+          form.submit();
+        }
+      }
+
+      // Add click event listener to predict button
+      var predictButton = document.getElementById("predictButton");
+      predictButton.addEventListener("click", predictButtonClick);
+    </script>
+  </body>
+</html>
